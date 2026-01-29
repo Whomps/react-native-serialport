@@ -1,4 +1,4 @@
-package com.melihyarikkaya.rnserialport;
+package com.whomps.rnserialport;
 
 /**
  * Created by melih on 12.10.2018.

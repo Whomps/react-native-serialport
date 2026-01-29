@@ -1,23 +1,23 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.0")
+        classpath("com.android.tools.build:gradle:8.7.3")
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 34
+    namespace "com.whomps.rnserialport"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -26,7 +26,7 @@ android {
             minifyEnabled false
         }
     }
-    lintOptions {
+    lint {
         abortOnError false
         disable 'GradleCompatible'
     }
@@ -43,18 +43,18 @@ repositories {
         url("$rootDir/../node_modules/react-native/android")
     }
     google()
-    jcenter()
+    mavenCentral()
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }
 
 dependencies {
     implementation 'com.google.guava:guava:20.0'
-    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-android:+'
     implementation 'com.github.felHR85:UsbSerial:6.0.6'
 }
