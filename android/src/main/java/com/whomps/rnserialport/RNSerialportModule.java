@@ -1,4 +1,4 @@
-package com.melihyarikkaya.rnserialport;
+package com.whomps.rnserialport;
 
 import android.app.PendingIntent;
 import android.os.Build;
@@ -16,6 +16,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableNativeArray;
 
 import android.util.Base64;
@@ -56,8 +57,8 @@ public class RNSerialportModule extends ReactContextBaseJavaModule {
   private final String ACTION_USB_PERMISSION_NOT_GRANTED = "com.felhr.usbservice.USB_PERMISSION_NOT_GRANTED";
   private final String ACTION_USB_DISCONNECTED = "com.felhr.usbservice.USB_DISCONNECTED";
   private final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
-  private final String ACTION_USB_NOT_OPENED = "com.melihyarikkaya.rnserialport.USB_NOT_OPENED";
-  private final String ACTION_USB_CONNECT = "com.melihyarikkaya.rnserialport.USB_CONNECT";
+  private final String ACTION_USB_NOT_OPENED = "com.whomps.rnserialport.USB_NOT_OPENED";
+  private final String ACTION_USB_CONNECT = "com.whomps.rnserialport.USB_CONNECT";
 
   //react-native events
   private final String onErrorEvent              = "onError";
@@ -376,7 +377,7 @@ public class RNSerialportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void writeBytes(byte[] bytes) {
+  public void writeBytes(ReadableArray byteArray) {
     if(!usbServiceStarted){
       eventEmit(onErrorEvent, createError(Definitions.ERROR_USB_SERVICE_NOT_STARTED, Definitions.ERROR_USB_SERVICE_NOT_STARTED_MESSAGE));
       return;
@@ -384,6 +385,10 @@ public class RNSerialportModule extends ReactContextBaseJavaModule {
     if(!serialPortConnected || serialPort == null) {
       eventEmit(onErrorEvent, createError(Definitions.ERROR_THERE_IS_NO_CONNECTION, Definitions.ERROR_THERE_IS_NO_CONNECTION_MESSAGE));
       return;
+    }
+    byte[] bytes = new byte[byteArray.size()];
+    for (int i = 0; i < byteArray.size(); i++) {
+      bytes[i] = (byte) byteArray.getInt(i);
     }
     serialPort.write(bytes);
   }

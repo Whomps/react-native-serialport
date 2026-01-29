@@ -4,7 +4,7 @@ This fork of react-native-serialport is used because it fixes [this issue](https
 
 ### installation
 ```
-npm i @maheshmestri/react-native-serialport
+npm i @whomps/react-native-serialport
 ```
 
 #### This library is for usb serial port communication on android platform 
@@ -38,4 +38,4 @@ npm i @maheshmestri/react-native-serialport
 | DRIVER                 | AUTO                                     |
 
 ### Java Package Name
- _com.melihyarikkaya.rnserialport_
+ _com.whomps.rnserialport_
